@@ -1,0 +1,17 @@
+# set XDG_CONFIG_HOME to ~/.config
+export XDG_CONFIG_HOME=$HOME/.config
+VIM="nvim"
+
+# set XDG_CONFIG_HOME to ~/.config/personal
+PERSONAL=$XDG_CONFIG_HOME/personal
+
+# exec and import function
+source $PERSONAL/env
+
+export DOTFILES=$HOME/.dotfiles
+
+#import script from ~/.local/bin
+addToPathFront $HOME/.local/bin 
+
+bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^h "tmux-cht\n"

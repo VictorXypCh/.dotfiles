@@ -1,0 +1,4 @@
+
+## Run this command to fix backspace not working on tmux
+$(brew --prefix)/opt/ncurses/bin/infocmp tmux-256color > ~/tmux-256color.info
+tic -xe tmux-256color ~/tmux-256color.info

@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+STOW_FOLDER="zsh,bin,nvim,tmux,yabai"
+pushd $DOTFILES
+for folder in $(echo $STOW_FOLDER | sed "s/,/ /g")
+    do
+        echo $folder
+        stow -D $folder
+        stow $folder
+    done
+popd
