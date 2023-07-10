@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+addToPathFront() {
+    # add path if not exist in PATH
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
