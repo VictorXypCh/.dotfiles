@@ -71,7 +71,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git zsh-nvm)
+plugins=(git nvm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -101,32 +101,16 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-# Flutter
-export PATH="$PATH:/Users/victorchan/Downloads/flutter/bin"
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-export PATH="$PATH":"$HOME/.yabairc"
 # For tkinter 
 #export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
 source ~/.zsh_profile
 
-# bun completions
-[ -s "/Users/victorchan/.bun/_bun" ] && source "/Users/victorchan/.bun/_bun"
 
-# Bun
-export BUN_INSTALL="/Users/victorchan/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/14/bin"
-
-## OpenSSL
-#If you need to have openssl first in your PATH run:
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH" 
-
-#For compilers to find openssl you may need to set:
-export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 
 #For pkg-config to find openssl you may need to set:
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
-export GO111MODULE=on
-export PATH="$PATH:$(go env GOPATH)/bin"
+#export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+#export GO111MODULE=on
+#export PATH="$PATH:$(go env GOPATH)/bin"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
