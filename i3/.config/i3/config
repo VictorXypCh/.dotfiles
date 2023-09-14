@@ -194,8 +194,11 @@ bindsym $mod+Control+l exec "i3lock -c 000000"
 exec --no-startup-id /usr/bin/bluetooth-applet
 exec --no-startup-id /usr/bin/blueman-applet
 
-bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl s +5%
+#bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
+#bindsym XF86MonBrightnessUp exec brightnessctl s +5%
+
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # decrease screen brightness
 
 exec_always "setxkbmap -model pc104 -layout us,la -variant ,, -option grp:alt_shift_toggle"
 
