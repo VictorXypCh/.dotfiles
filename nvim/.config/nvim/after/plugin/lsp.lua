@@ -2,16 +2,42 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
+
+vim.lsp.config("ts_ls", {
+    flags = { debounce_text_changes = 300 }
+})
+vim.lsp.enable({ "ts_ls" })
+
+
 lsp.ensure_installed({
-    'tsserver',
+    'ts_ls',
     'rust_analyzer',
     'jdtls',
+'intelephense', 'php_cs_fixer', 'laravel_pint', 'phpactor'
     -- 'gopls'
+})
+
+-- Capabilities (for nvim-cmp)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+if ok_cmp then
+    capabilities = cmp_lsp.default_capabilities(capabilities)
+end
+
+-- LSP servers
+local lspconfig = require("lspconfig")
+
+lspconfig.intelephense.setup({
+    capabilities = capabilities,
+    filetypes = { "php" },
+    root_dir = lspconfig.util.root_pattern(
+        "composer.json",
+        ".git"
+    ),
 })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -58,8 +84,11 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 
-lsp.setup()
+-- lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = true,
+   signs = true,
+    underline = true,
+    update_in_insert = false,
 })

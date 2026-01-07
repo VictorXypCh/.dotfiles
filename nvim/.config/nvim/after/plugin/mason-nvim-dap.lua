@@ -1,6 +1,8 @@
 require("mason").setup()
 require('mason-nvim-dap').setup({
-    ensure_installed = { 'javadbg', 'javatest', 'node2','tsserver' },
+    ensure_installed = { 'javadbg', 'javatest', 'node2','ts_ls'
+'intelephense', 'php_cs_fixer', 'laravel_pint', 'phpactor'
+},
     handlers = {}, -- sets up dap in the predefined manner
 })
 

@@ -40,13 +40,20 @@ return require('packer').startup(function(use)
         end
     })
 
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end, }
-
+ use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('nvim-treesitter.install').compilers = { "gcc" } -- Example compiler
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { "lua", "vim", "javascript" }, -- Languages to install
+        sync_install = false,
+        auto_install = true, -- Automatically install new parsers
+        highlight = {
+          enable = true, -- Enable syntax highlighting
+        },
+      }
+    end,
+  }
     use('theprimeagen/harpoon')
     use('mbbill/undotree')
     use('tpope/vim-fugitive')

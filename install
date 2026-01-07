@@ -1,11 +1,18 @@
 #!/usr/bin/env zsh
 
-STOW_FOLDER="personal,zsh,bin,nvim,tmux"
-pushd $DOTFILES
-for folder in $(echo $STOW_FOLDER | sed "s/,/ /g")
-    do
-        echo $folder
-        stow -D $folder
-        stow $folder
-    done
+STOW_FOLDERS=(personal zsh bin nvim tmux)
+
+pushd "$DOTFILES" || exit 1
+
+for folder in $STOW_FOLDERS; do
+  if [[ -d "$folder" ]]; then
+    echo "Stowing $folder"
+    stow -D "$folder"
+    stow "$folder"
+  else
+    echo "Skipping $folder (not found)"
+  fi
+done
+
 popd
+

@@ -111,6 +111,12 @@ source ~/.zsh_profile
 #export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
 #export GO111MODULE=on
 #export PATH="$PATH:$(go env GOPATH)/bin"
+# Define the Go Workspace
+export GOPATH=/usr/local/go
+# Add Go binaries to your PATH
+export PATH=$PATH:$GOPATH/bin
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/Users/macbookpro/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/macbookpro/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
