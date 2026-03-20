@@ -17,25 +17,6 @@ lsp.ensure_installed({
     -- 'gopls'
 })
 
--- Capabilities (for nvim-cmp)
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-if ok_cmp then
-    capabilities = cmp_lsp.default_capabilities(capabilities)
-end
-
--- LSP servers
-local lspconfig = require("lspconfig")
-
-lspconfig.intelephense.setup({
-    capabilities = capabilities,
-    filetypes = { "php" },
-    root_dir = lspconfig.util.root_pattern(
-        "composer.json",
-        ".git"
-    ),
-})
-
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
@@ -82,6 +63,50 @@ lsp.on_attach(function(client, bufnr)
     -- auto format on save
     lsp.buffer_autoformat()
 end)
+
+
+-- Capabilities (for nvim-cmp)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok_cmp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+if ok_cmp then
+    capabilities = cmp_lsp.default_capabilities(capabilities)
+end
+
+-- LSP servers
+local lspconfig = require("lspconfig")
+
+lspconfig.intelephense.setup({
+    capabilities = capabilities,
+    filetypes = { "php" },
+    root_dir = lspconfig.util.root_pattern(
+        "composer.json",
+        ".git"
+    ),
+     on_attach = function(client, bufnr)
+        -- force-enable code actions (safety)
+        client.server_capabilities.codeActionProvider = true
+    end,
+})
+
+
+
+-- PHP / Filament
+lspconfig.intelephense.setup({
+    capabilities = capabilities,
+    root_dir = util.root_pattern("composer.json", "artisan", ".git"),
+    settings = {
+        intelephense = {
+            environment = {
+                includePaths = {
+                    "vendor/filament",
+                },
+            },
+            files = {
+                maxSize = 5000000,
+            },
+        },
+    },
+})
 
 
 -- lsp.setup()

@@ -43,12 +43,12 @@ return require('packer').startup(function(use)
         requires = {
             "MunifTanjim/nui.nvim",
             "nvim-lua/plenary.nvim",
-            "nvim-neotest/nio.nvim",
+            -- "nvim-neotest/nio.nvim",
         },
         config = function()
             require('laravel').setup({
                 notifications = true,
-                debug = false,
+                debug = true,
                 keymaps = true,
                 sail = {
                     enabled = true,
@@ -94,4 +94,11 @@ return require('packer').startup(function(use)
 
 
     use { 'neoclide/coc.nvim', branch = 'release' }
+
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+
+    use({'yaegassy/coc-laravel', run= 'yarn install --frozen-lockfile'})
+    use {"sindrets/diffview.nvim" }
+    -- Copilot
+    -- use{ 'CopilotC-Nvim/CopilotChat.nvim', requires = { 'nvim-lua/plenary.nvim'}, run = "make tiktoken" }
 end)
